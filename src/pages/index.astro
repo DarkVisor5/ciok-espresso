@@ -1,11 +1,162 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import ChiSiamo from "../components/ChiSiamo.jsx";
+import SwiperSlider from "../components/Swiperslider.jsx";
+import Header from "../components/Header.jsx"; 
+import Divider from "../components/Divider.astro";
+import DeveloperTodo from "../components/DeveloperTodo.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<Header client:load />
+	<!-- Hero Section -->
+	<section id="hero" class="container mx-auto text-center py-20 bg-[#FFFCF5] text-[#411900]">
+		<div class="max-w-5xl mx-auto px-6 flex items-center justify-center gap-10">
+			<!-- Swiper with hydration -->
+			<div class="relative w-full max-w-[400px] mx-auto flex justify-center items-center">
+				<SwiperSlider client:load />
+			</div>
+			<!-- Testo e pulsante -->
+			<div>
+				<h1 class="text-5xl font-extrabold text-left">
+					L'eccellenza del cioccolato artigianale
+				</h1>
+				<p class="mt-4 text-lg text-left">
+					Dal cuore dell'Italia, il cioccolato più pregiato lavorato con passione e tradizione.
+				</p>
+				<div class="mt-6 text-left">
+					<a href="#prodotti" class="btn btn-highlight btn-lg">
+						Scopri i nostri prodotti
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <Divider />
+
+    <!-- Chi Siamo Section -->
+    <ChiSiamo client:load />
+
+    <Divider />
+
+  
+    <!-- Sezione Prodotti in Evidenza -->
+    <section id="prodotti" class="container mx-auto py-24 bg-[#FAF3E0] text-[#411900]">
+    <h2 class="text-4xl font-bold text-center font-serif mb-6">
+        I Nostri Prodotti
+    </h2>
+    <p class="text-center text-lg max-w-2xl mx-auto mb-12">
+        Scopri le nostre specialità artigianali create con ingredienti selezionati e passione per l'eccellenza.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Card 1 -->
+        <div class="bg-[#FFFCF5] rounded-2xl shadow-lg p-6 text-center transition transform hover:scale-105 hover:shadow-xl">
+        <figure>
+            <img src="./pralina.jpg" alt="Pralina Ripiena" class="w-36 h-36 object-cover mx-auto rounded-xl mb-4" />
+        </figure>
+        <h3 class="text-2xl font-semibold mb-2">Praline Ripiene</h3>
+        <p class="text-[#5C2A12]">Un cuore morbido di gusto avvolto da finissimo cioccolato.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-[#FFFCF5] rounded-2xl shadow-lg p-6 text-center transition transform hover:scale-105 hover:shadow-xl">
+        <figure>
+            <img src="./tavolette.jpg" alt="Tavolette di Cioccolato" class="w-36 h-36 object-cover mx-auto rounded-xl mb-4" />
+        </figure>
+        <h3 class="text-2xl font-semibold mb-2">Tavolette di Cioccolato</h3>
+        <p class="text-[#5C2A12]">Latte, fondente o nocciolato: il gusto autentico del cacao.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-[#FFFCF5] rounded-2xl shadow-lg p-6 text-center transition transform hover:scale-105 hover:shadow-xl">
+        <figure>
+            <img src="./espositore.jpg" alt="Espositori" class="w-36 h-36 object-cover mx-auto rounded-xl mb-4" />
+        </figure>
+        <h3 class="text-2xl font-semibold mb-2">Espositori</h3>
+        <p class="text-[#5C2A12]">Eleganti espositori per punti vendita e partner commerciali.</p>
+        </div>
+    </div>
+    </section>
+
+
+   <!-- Lavora con noi -->
+<section id="lavora-con-noi" class="container mx-auto bg-primary text-neutral py-16 text-center">
+    <div class="container mx-auto max-w-3xl">
+        <h2 class="text-4xl font-bold">Lavora con noi</h2>
+        <p class="mt-4">
+            Sei un'azienda interessata a collaborare con noi? Offriamo soluzioni personalizzate per il tuo business.
+        </p>
+        <div class="mt-6">
+            <a href="#contatti" class="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"            >
+                Contattaci ora
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contatti & Newsletter -->
+<section id="contatti" class="container mx-auto bg-secondary text-primary py-16 text-center">
+    <h2 class="text-3xl font-bold">Rimani aggiornato sulle nostre novità</h2>
+    <p class="mt-4 text-lg">Iscriviti alla nostra newsletter per ricevere offerte esclusive e news dal mondo del cioccolato.</p>
+    <form class="mt-6 max-w-lg mx-auto flex">
+        <input type="email" class="input input-bordered w-full" placeholder="Inserisci la tua email" required>
+        <button class="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"        >
+            Iscriviti
+        </button>
+    </form>
+</section>
+
 </Layout>
+<DeveloperTodo />
+
+<style>
+/* Ensure Swiper uses flex layout */
+.swiper {
+    display: flex !important;
+    position: relative !important;
+    z-index: 5 !important;
+    width: 100% !important;
+}
+
+/* Ensure slides are properly aligned */
+.swiper-wrapper {
+    display: flex !important;
+}
+/* Adjust arrow positioning */
+.swiper-button-prev, 
+.swiper-button-next {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 50 !important;
+    width: 40px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+    color: #411900 !important;
+}
+.swiper-button-prev {
+    left: 0 !important;
+}
+
+.swiper-button-next {
+    right: 0 !important;
+}
+/* Fix slide display */
+.swiper-slide {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Ensure images scale properly inside Swiper */
+.swiper-slide img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+
+</style>
