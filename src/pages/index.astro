@@ -5,13 +5,20 @@ import SwiperSlider from "../components/Swiperslider.jsx";
 import Header from "../components/Header.jsx"; 
 import Divider from "../components/Divider.astro";
 import DeveloperTodo from "../components/DeveloperTodo.astro";
+import ModernBackground from "../components/ModernBackground.astro";
+
 ---
 
 <Layout>
+    <ModernBackground />
 	<Header client:load />
 	<!-- Hero Section -->
-	<section id="hero" class="container mx-auto text-center py-20 bg-[#FFFCF5] text-[#411900]">
-		<div class="max-w-5xl mx-auto px-6 flex items-center justify-center gap-10">
+	<section
+            id="hero"
+            class="relative z-10 container mx-auto text-center py-20 text-[#411900]"
+            >
+            <div class="backdrop-blur-md shadow-2xl rounded-3xl p-10 flex flex-col lg:flex-row items-center gap-6 xl:gap-8">
+
 			<!-- Swiper with hydration -->
 			<div class="relative w-full max-w-[400px] mx-auto flex justify-center items-center">
 				<SwiperSlider client:load />
@@ -25,9 +32,9 @@ import DeveloperTodo from "../components/DeveloperTodo.astro";
 					Dal cuore dell'Italia, il cioccolato più pregiato lavorato con passione e tradizione.
 				</p>
 				<div class="mt-6 text-left">
-					<a href="#prodotti" class="btn btn-highlight btn-lg">
-						Scopri i nostri prodotti
-					</a>
+					<a href="#prodotti" class="btn btn-primary btn-lg">
+                        Scopri i nostri prodotti
+                      </a>                      
 				</div>
 			</div>
 		</div>
@@ -110,53 +117,3 @@ import DeveloperTodo from "../components/DeveloperTodo.astro";
 
 </Layout>
 <DeveloperTodo />
-
-<style>
-/* Ensure Swiper uses flex layout */
-.swiper {
-    display: flex !important;
-    position: relative !important;
-    z-index: 5 !important;
-    width: 100% !important;
-}
-
-/* Ensure slides are properly aligned */
-.swiper-wrapper {
-    display: flex !important;
-}
-/* Adjust arrow positioning */
-.swiper-button-prev, 
-.swiper-button-next {
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    z-index: 50 !important;
-    width: 40px !important;
-    height: 40px !important;
-    cursor: pointer !important;
-    color: #411900 !important;
-}
-.swiper-button-prev {
-    left: 0 !important;
-}
-
-.swiper-button-next {
-    right: 0 !important;
-}
-/* Fix slide display */
-.swiper-slide {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-/* Ensure images scale properly inside Swiper */
-.swiper-slide img {
-    max-width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    display: block !important;
-}
-
-
-</style>

@@ -1,0 +1,49 @@
+<div class="background-wrapper">
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="grain-overlay"></div>
+  </div>
+  
+  <style>
+    .background-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      pointer-events: none;
+    }
+  
+    .layer {
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #41190022 0%, transparent 70%);
+      animation: swirl 40s infinite ease-in-out;
+    }
+  
+    .layer:nth-child(2) {
+      background: radial-gradient(circle at 30% 30%, #C99B73 0%, transparent 60%);
+      animation-delay: -20s;
+    }
+  
+    .grain-overlay {
+      background-image: url('cardboard.png');
+      background-repeat: repeat;
+      opacity: 0.06;
+      mix-blend-mode: multiply;
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+  
+    @keyframes swirl {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+  </style>
+  
