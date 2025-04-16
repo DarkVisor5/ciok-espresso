@@ -82,9 +82,9 @@ import Footer from "../components/Footer.astro";
     </section>
 
     <!-- Modale Google Form -->
-    <div id="contact-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 items-center justify-center hidden">
+    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden backdrop-blur-sm bg-gradient-to-br from-[#00000099] to-[#41190066] transition-opacity duration-300">
       <div class="flex w-full h-full items-center justify-center overflow-auto">
-        <div class="modal-content bg-white p-4 rounded-xl w-full max-w-2xl relative mt-10 mb-10">
+        <div class="modal-content bg-white p-4 rounded-xl w-full max-w-2xl relative mt-10 mb-10 transform transition-all duration-300 scale-95 opacity-0" id="modal-box">
           <button onclick="closeModal()" class="absolute top-2 right-4 text-2xl font-bold text-[#411900]">&times;</button>
           <iframe 
             src="https://docs.google.com/forms/d/e/1FAIpQLSdABb3NBdMkmJ2ED5pZtodPvITHJAO4EjKz0437Egn0btKRQQ/viewform?embedded=true"
@@ -96,8 +96,8 @@ import Footer from "../components/Footer.astro";
         </div>
       </div>
     </div>
+    <!--
 
-    <!-- Contatti & Newsletter -->
     <section class="card-choco max-w-xl mx-auto my-16 text-center">
         <h2 class="text-2xl font-semibold mb-2">📬 Rimani aggiornato</h2>
         <p class="mb-4">Iscriviti alla nostra newsletter per ricevere offerte esclusive e news dal mondo del cioccolato.</p>
@@ -106,27 +106,52 @@ import Footer from "../components/Footer.astro";
           <button type="submit" class="btn-choco">Iscriviti</button>
         </form>
     </section>
-  
+  -->
 <Footer />
 
-<script>
+<script is:inline>
   function openModal() {
+  const modal = document.getElementById('contact-modal');
+  const modalBox = document.getElementById('modal-box');
+
+  if (modal && modalBox) {
+    modal.classList.remove('hidden');
+
+    // Animazione
+    setTimeout(() => {
+      modalBox.classList.remove('scale-95', 'opacity-0');
+      modalBox.classList.add('scale-100', 'opacity-100');
+
+      // Scrolla direttamente la box, NON l'overlay
+      modalBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 10);
+  }
+}
+  function closeModal() {
     const modal = document.getElementById('contact-modal');
-    if (modal) {
-      modal.classList.remove('hidden');
-      modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const modalBox = document.getElementById('modal-box');
+
+    if (modal && modalBox) {
+      // Attiva animazione di chiusura
+      modalBox.classList.remove('scale-100', 'opacity-100');
+      modalBox.classList.add('scale-95', 'opacity-0');
+
+      // Nasconde il modale dopo l'animazione
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300); // deve combaciare con duration-300
     }
   }
 
-  function closeModal() {
-    const modal = document.getElementById('contact-modal');
-    if (modal) {
-      modal.classList.add('hidden');
-    }
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.querySelector('[onclick="openModal()"]');
+    const closeBtn = document.querySelector('[onclick="closeModal()"]');
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  });
 </script>
 
 
+
 </Layout>
-
-
