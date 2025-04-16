@@ -11,8 +11,27 @@ export default function Header() {
       setPrevScroll(currentScroll);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  
+    // Scroll offset fix
+    const links = document.querySelectorAll('a[href^="#"]');
+    const OFFSET = 80;
+    const smoothScroll = (e) => {
+      const href = e.currentTarget.getAttribute('href');
+      const targetEl = document.querySelector(href);
+      if (targetEl) {
+        e.preventDefault();
+        const top = targetEl.getBoundingClientRect().top + window.pageYOffset - OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    };
+    links.forEach(link => link.addEventListener('click', smoothScroll));
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      links.forEach(link => link.removeEventListener('click', smoothScroll));
+    };
   }, [prevScroll]);
+  
 
   return (
     <header className={`sticky top-0 z-50 transition-transform duration-300 shadow-md ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
@@ -29,7 +48,6 @@ export default function Header() {
               <li><a href="#chi-siamo"  className="link-nav">La nostra storia</a></li>
               <li><a href="#prodotti" className="link-nav">I nostri prodotti</a></li>
               <li><a href="#lavora-con-noi" className="link-nav">Lavora con noi</a></li>
-              <li><a href="#contatti" className="link-nav">Contatti</a></li>
               <li>
               <a href="/ordina" className="btn-overlay-dark w-full text-center mt-2">
                 Ordina Ora
@@ -53,13 +71,12 @@ export default function Header() {
             <li><a href="#chi-siamo" className="hover:text-yellow-200">La nostra storia</a></li>
             <li><a href="#prodotti" className="hover:text-yellow-300">I nostri prodotti</a></li>
             <li><a href="#lavora-con-noi" className="hover:text-yellow-300">Lavora con noi</a></li>
-            <li><a href="#contatti" className="hover:text-yellow-300">Contatti</a></li>
           </ul>
         </div>
 
         {/* End: CTA button */}
         <div className="navbar-end hidden lg:flex items-center">
-          <a href="/ordina" className="btn-overlay-dark px-4 py-2 text-sm">
+          <a href="/ordina" className="btn-choco px-4 py-2 text-sm">
             Ordina Ora
           </a>
         </div>

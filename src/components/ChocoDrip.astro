@@ -1,0 +1,58 @@
+---
+// Nessuna logica lato server
+---
+<div class="choco-drip-container">
+    <svg id="chocoDrip" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path
+        id="dripPath"
+        fill="#411900"
+        d="M0,160 Q240,300 480,160 T960,160 T1440,160 V320H0Z"
+      />
+    </svg>
+  </div>
+  
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Animazione -->
+  <script>
+    const dripPath = document.querySelector("#dripPath");
+  
+    const shapes = [
+      "M0,160 Q240,300 480,160 T960,160 T1440,160 V320H0Z",
+      "M0,160 Q240,250 480,200 T960,180 T1440,160 V320H0Z",
+      "M0,160 Q240,280 480,240 T960,220 T1440,160 V320H0Z"
+    ];
+  
+    let i = 0;
+  
+    function animateDrip() {
+      gsap.to(dripPath, {
+        duration: 3,
+        attr: { d: shapes[i % shapes.length] },
+        ease: "power1.inOut",
+        onComplete: () => {
+          i++;
+          animateDrip();
+        }
+      });
+    }
+  
+    animateDrip();
+  </script>
+  
+  <style>
+    .choco-drip-container {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      z-index: -5;
+    }
+  
+    #chocoDrip {
+      width: 100%;
+      height: 200px;
+    }
+  </style>
+  

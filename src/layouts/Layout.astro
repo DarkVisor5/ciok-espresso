@@ -1,21 +1,29 @@
 ---
 import "../styles/global.css";
 import ModernBackground from "../components/ModernBackground.astro";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+if (typeof window !== 'undefined') {
+  AOS.init({
+    duration: 700,
+    once: true,
+    offset: 100
+  });
+}
 ---
 
 <!doctype html>
 <html lang="en" data-theme="light">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Ciok Espresso</title>
-	</head>
-	<body class="bg-[#FFFCF5]/90 text-[#411900] font-sans backdrop-blur-sm">
-		<ModernBackground />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Ciok Espresso</title>
+  </head>
+  <body class="bg-[#FFFCF5]/90 text-[#411900] font-sans backdrop-blur-sm">
+    <ModernBackground />
+    <slot />
+  </body>
 </html>
-

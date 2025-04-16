@@ -4,13 +4,13 @@ import ChiSiamo from "../components/ChiSiamo.jsx";
 import SwiperSlider from "../components/Swiperslider.jsx";
 import Header from "../components/Header.jsx"; 
 import Divider from "../components/Divider.astro";
-import DeveloperTodo from "../components/DeveloperTodo.astro";
-import ModernBackground from "../components/ModernBackground.astro";
 
+import { products } from '../components/Products.mjs';
+import ProductCard from "../components/ProductCard.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-    <ModernBackground />
 	<Header client:load />
 	<!-- Hero Section -->
 	<section
@@ -25,16 +25,16 @@ import ModernBackground from "../components/ModernBackground.astro";
 			</div>
 			<!-- Testo e pulsante -->
 			<div>
-				<h1 class="text-5xl font-extrabold text-left">
+				<h1 class="text-5xl font-serif font-extrabold text-left">
 					L'eccellenza del cioccolato artigianale
 				</h1>
 				<p class="mt-4 text-lg text-left">
 					Dal cuore dell'Italia, il cioccolato più pregiato lavorato con passione e tradizione.
 				</p>
 				<div class="mt-6 text-left">
-					<a href="#prodotti" class="btn btn-primary btn-lg">
+					<a href="#prodotti" class="border border-[#411900] text-[#411900] font-semibold px-5 py-2 rounded-lg hover:bg-[#f1d2a5] transition">
                         Scopri i nostri prodotti
-                      </a>                      
+                      </a>                                          
 				</div>
 			</div>
 		</div>
@@ -49,71 +49,84 @@ import ModernBackground from "../components/ModernBackground.astro";
 
   
     <!-- Sezione Prodotti in Evidenza -->
-    <section id="prodotti" class="container mx-auto py-24 bg-[#FAF3E0] text-[#411900]">
-    <h2 class="text-4xl font-bold text-center font-serif mb-6">
-        I Nostri Prodotti
-    </h2>
-    <p class="text-center text-lg max-w-2xl mx-auto mb-12">
-        Scopri le nostre specialità artigianali create con ingredienti selezionati e passione per l'eccellenza.
-    </p>
+    <section id="prodotti" class="text-[#411900] py-24 px-4">
+        <h2 class="text-4xl font-bold text-center font-serif mb-6">I Nostri Prodotti</h2>
+        <p class="text-center text-lg max-w-2xl mx-auto mb-12">
+          Scopri le nostre specialità artigianali create con ingredienti selezionati e passione per l'eccellenza.
+        </p>
+      
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            {products.map((product, index) => (
+              <div class={products.length === 4 && index === 3 ? 'col-span-1 lg:col-start-2' : ''}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>          
+          
+    </section>
+      
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Card 1 -->
-        <div class="bg-[#FFFCF5] rounded-2xl shadow-lg p-6 text-center transition transform hover:scale-105 hover:shadow-xl">
-        <figure>
-            <img src="./pralina.jpg" alt="Pralina Ripiena" class="w-36 h-36 object-cover mx-auto rounded-xl mb-4" />
-        </figure>
-        <h3 class="text-2xl font-semibold mb-2">Praline Ripiene</h3>
-        <p class="text-[#5C2A12]">Un cuore morbido di gusto avvolto da finissimo cioccolato.</p>
-        </div>
 
-        <!-- Card 2 -->
-        <div class="bg-[#FFFCF5] rounded-2xl shadow-lg p-6 text-center transition transform hover:scale-105 hover:shadow-xl">
-        <figure>
-            <img src="./tavolette.jpg" alt="Tavolette di Cioccolato" class="w-36 h-36 object-cover mx-auto rounded-xl mb-4" />
-        </figure>
-        <h3 class="text-2xl font-semibold mb-2">Tavolette di Cioccolato</h3>
-        <p class="text-[#5C2A12]">Latte, fondente o nocciolato: il gusto autentico del cacao.</p>
-        </div>
+    <!-- Lavora con noi -->
+    <section id="lavora-con-noi" class="bg-overlay-dark backdrop-blur-sm rounded-2xl mx-4 py-16 my-12 text-center text-[#FAF3E0] shadow-choco">
+      <div class="container mx-auto max-w-3xl">
+        <h2 class="text-4xl font-serif font-bold mb-4">Lavora con noi</h2>
+        <p class="max-w-xl mx-auto text-lg">
+          Sei un’azienda interessata a collaborare? 🍫 Offriamo soluzioni personalizzate per la tua attività.
+        </p>
 
-        <!-- Card 3 -->
-        <div class="bg-[#FFFCF5] rounded-2xl shadow-lg p-6 text-center transition transform hover:scale-105 hover:shadow-xl">
-        <figure>
-            <img src="./espositore.jpg" alt="Espositori" class="w-36 h-36 object-cover mx-auto rounded-xl mb-4" />
-        </figure>
-        <h3 class="text-2xl font-semibold mb-2">Espositori</h3>
-        <p class="text-[#5C2A12]">Eleganti espositori per punti vendita e partner commerciali.</p>
+        <div class="mt-6">
+          <a href="javascript:void(0)" onclick="openModal()" class="btn-choco mt-6 inline-block">Contattaci ora</a>
         </div>
-    </div>
+      </div>
     </section>
 
-
-   <!-- Lavora con noi -->
-<section id="lavora-con-noi" class="container mx-auto bg-primary text-neutral py-16 text-center">
-    <div class="container mx-auto max-w-3xl">
-        <h2 class="text-4xl font-bold">Lavora con noi</h2>
-        <p class="mt-4">
-            Sei un'azienda interessata a collaborare con noi? Offriamo soluzioni personalizzate per il tuo business.
-        </p>
-        <div class="mt-6">
-            <a href="#contatti" class="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"            >
-                Contattaci ora
-            </a>
+    <!-- Modale Google Form -->
+    <div id="contact-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 items-center justify-center hidden">
+      <div class="flex w-full h-full items-center justify-center overflow-auto">
+        <div class="modal-content bg-white p-4 rounded-xl w-full max-w-2xl relative mt-10 mb-10">
+          <button onclick="closeModal()" class="absolute top-2 right-4 text-2xl font-bold text-[#411900]">&times;</button>
+          <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdABb3NBdMkmJ2ED5pZtodPvITHJAO4EjKz0437Egn0btKRQQ/viewform?embedded=true"
+            width="100%"
+            height="824"
+            style="border: none; margin: 0;">
+            Loading…
+          </iframe>
         </div>
+      </div>
     </div>
-</section>
 
-<!-- Contatti & Newsletter -->
-<section id="contatti" class="container mx-auto bg-secondary text-primary py-16 text-center">
-    <h2 class="text-3xl font-bold">Rimani aggiornato sulle nostre novità</h2>
-    <p class="mt-4 text-lg">Iscriviti alla nostra newsletter per ricevere offerte esclusive e news dal mondo del cioccolato.</p>
-    <form class="mt-6 max-w-lg mx-auto flex">
-        <input type="email" class="input input-bordered w-full" placeholder="Inserisci la tua email" required>
-        <button class="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"        >
-            Iscriviti
-        </button>
-    </form>
-</section>
+    <!-- Contatti & Newsletter -->
+    <section class="card-choco max-w-xl mx-auto my-16 text-center">
+        <h2 class="text-2xl font-semibold mb-2">📬 Rimani aggiornato</h2>
+        <p class="mb-4">Iscriviti alla nostra newsletter per ricevere offerte esclusive e news dal mondo del cioccolato.</p>
+        <form class="flex flex-col sm:flex-row gap-3 items-center justify-center">
+          <input type="email" placeholder="Inserisci la tua email" class="input input-bordered w-full sm:w-auto" required />
+          <button type="submit" class="btn-choco">Iscriviti</button>
+        </form>
+    </section>
+  
+<Footer />
+
+<script>
+  function openModal() {
+    const modal = document.getElementById('contact-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('contact-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+  }
+</script>
+
 
 </Layout>
-<DeveloperTodo />
+
+

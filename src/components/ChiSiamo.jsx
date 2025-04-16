@@ -39,7 +39,7 @@ const ChiSiamo = () => {
         
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          class="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"
+          className="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"
         >
           {isExpanded ? "Leggi meno" : "Leggi di più"}
         </button>

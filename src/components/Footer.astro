@@ -1,0 +1,40 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[#411900] text-[#FAF3E0] py-12 mt-20">
+  <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <!-- Navigazione -->
+    <div>
+      <h3 class="text-lg font-bold mb-4">Navigazione</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#hero" class="hover:underline">Home</a></li>
+        <li><a href="#chi-siamo" class="hover:underline">Chi Siamo</a></li>
+        <li><a href="#prodotti" class="hover:underline">Prodotti</a></li>
+        <li><a href="#contatti" class="hover:underline">Contatti</a></li>
+      </ul>
+    </div>
+
+    <!-- Contatti -->
+    <div>
+      <h3 class="text-lg font-bold mb-4">Contatti</h3>
+      <p class="text-sm mb-2">📍 <strong>Sede legale</strong>:<br/>Via Crescenzio, 63<br/>00193 Roma</p>
+      <p class="text-sm mb-2">🏭 <strong>Sede operativa</strong>:<br/>Via G. Pascoli snc<br/>64023 Mosciano Sant'Angelo (TE)</p>
+      <p class="text-sm">📞 0858428141<br/>📧 <a href="mailto:info@ciokespresso.it" class="underline hover:text-cacao-light">info@ciokespresso.it</a></p>
+    </div>
+
+    <!-- Social + copyright -->
+    <div class="flex flex-col justify-between">
+      <div>
+        <h3 class="text-lg font-bold mb-4">Seguici</h3>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-cacao-light" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" class="hover:text-cacao-light" aria-label="Facebook">📘 Facebook</a>
+        </div>
+      </div>
+      <p class="text-xs mt-6">&copy; {year} Ciok Espresso. Tutti i diritti riservati.</p>
+    </div>
+
+  </div>
+</footer>
