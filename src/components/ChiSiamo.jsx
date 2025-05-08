@@ -14,6 +14,7 @@ const ChiSiamo = () => {
     >
       <div className="container mx-auto text-center max-w-3xl">
         <h2 className="text-4xl font-bold">Chi siamo</h2>
+
         <p className="mt-4">
           Ciok Espresso nasce come azienda produttiva di eccellenze dociarie legate alla lavorazione di confetti e cioccolata. Il nostro obbiettivo primario è quello di rispondere alla domanda di consumatori sempre più esigenti, guidati da una scelta consapevole e capaci di riconoscere la qualità oltre che la bontà. A questo scopo abbiamo messo a punto uno stabilimento produttivo altamente performante capace di offire un prodotto sicuro e di qualità garantita e certificata.
         </p>
@@ -23,6 +24,10 @@ const ChiSiamo = () => {
           transition={{ duration: 0.5 }}
           className="overflow-hidden mt-4 space-y-4"
         >
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+              <img src="/Azienda1.JPG" alt="Ingresso stabilimento" className="rounded-xl shadow-choco" />
+              <img src="/Azienda3.JPG" alt="Cancello e insegna" className="rounded-xl shadow-choco" />
+            </div>
             <p>
               <strong>La nostra storia</strong><br />
               Ci sono delle specialità che naturalmente rievocano antiche sapienze e maestrie artigianali. La nascita di Ciok Espresso rapprensenta l'unione tra la tradizione e l'evoluzione della produzione dolciaria, legata all'arte del confetto e del cioccolato, in una cornice di eccezione, quale l'Abruzzo, fatta di colline,mare e montagne del Gran Sasso. Lo splendido scenario abruzzese aiuta l'immaginazione e la mente ad assaporare, ancor prima del palato, prelibatezze autentiche e di estrema bontà. L'obbiettivo di Ciok Espresso è quello di creare eccellenze dolciarie,per questo ha messo a punto uno stabilimento produttivo nuovo e moderno capace di interpretare le esigenze del mercato nazionle e internazionale sia in termini di quantità che di qualità.
@@ -39,10 +44,11 @@ const ChiSiamo = () => {
         
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="bg-[#411900] text-[#FAF3E0] rounded-lg transition hover:bg-[#5a2a0e]"
+          className="btn-choco mt-6"
         >
           {isExpanded ? "Leggi meno" : "Leggi di più"}
         </button>
+
       </div>
     </motion.section>
   );

@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 
+const navItems = [
+  { href: "#chi-siamo", label: "La nostra storia" },
+  { href: "#prodotti", label: "I nostri prodotti" },
+  { href: "#lavora-con-noi", label: "Lavora con noi" },
+];
+
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [prevScroll, setPrevScroll] = useState(0);
 
   useEffect(() => {
+
     const handleScroll = () => {
       const currentScroll = window.scrollY;
       setIsVisible(prevScroll > currentScroll || currentScroll < 10);
@@ -35,7 +42,8 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-transform duration-300 shadow-md ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="navbar header-fade text-white px-4">
+      <div className="navbar header-fade text-white px-4 py-2">
+
         {/* Start: Logo + Mobile dropdown */}
         <div className="navbar-start">
           <div className="dropdown">
@@ -44,18 +52,18 @@ export default function Header() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow header-fade rounded-box w-52">
-              <li><a href="#chi-siamo"  className="link-nav">La nostra storia</a></li>
-              <li><a href="#prodotti" className="link-nav">I nostri prodotti</a></li>
-              <li><a href="#lavora-con-noi" className="link-nav">Lavora con noi</a></li>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow header-fade bg-cacao rounded-box w-52">
+              {navItems.map(({ href, label }) => (
+                <li key={href}>
+                  <a href={href} className="link-nav">{label}</a>
+                </li>
+              ))}
               <li>
-              <a href="/ordina" className="btn-overlay-dark w-full text-center mt-2">
-                Ordina Ora
-              </a>
-
+                <a href="/ordina" className="btn-overlay-dark w-full text-center mt-2">Ordina Ora</a>
               </li>
             </ul>
           </div>
+
           <a href="/" className="flex items-center">
             <img
               src="./Logo.jpg"
@@ -65,18 +73,20 @@ export default function Header() {
           </a>
         </div>
 
-        {/* Center: Desktop menu */}
+        {/* Desktop: Navigation */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-4 text-sm">
-            <li><a href="#chi-siamo" className="hover:text-yellow-200">La nostra storia</a></li>
-            <li><a href="#prodotti" className="hover:text-yellow-300">I nostri prodotti</a></li>
-            <li><a href="#lavora-con-noi" className="hover:text-yellow-300">Lavora con noi</a></li>
+            {navItems.map(({ href, label }) => (
+              <li key={href}>
+                <a href={href} className="link-nav hover:text-yellow-300">{label}</a>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* End: CTA button */}
+        {/* CTA */}
         <div className="navbar-end hidden lg:flex items-center">
-          <a href="/ordina" className="btn-choco px-4 py-2 text-sm">
+          <a href="/ordina" className="btn-choco px-4 py-2 text-sm text-cacao shadow-choco">
             Ordina Ora
           </a>
         </div>

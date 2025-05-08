@@ -1,12 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ChiSiamo from "../components/ChiSiamo.jsx";
-import SwiperSlider from "../components/Swiperslider.jsx";
 import Header from "../components/Header.jsx"; 
 import Divider from "../components/Divider.astro";
+import ProductShowcase from "../components/Totem.jsx";
 
 import { products } from '../components/Products.mjs';
-import ProductCard from "../components/ProductCard.astro";
 import Footer from "../components/Footer.astro";
 ---
 
@@ -15,29 +14,36 @@ import Footer from "../components/Footer.astro";
 	<!-- Hero Section -->
 	<section
             id="hero"
-            class="relative z-10 container mx-auto text-center py-20 text-[#411900]"
-            >
-            <div class="backdrop-blur-md shadow-2xl rounded-3xl p-10 flex flex-col lg:flex-row items-center gap-6 xl:gap-8">
+            class="relative z-10 container mx-auto text-center py-16 text-[#411900]"
+          >
+      <div class="p-2 rounded-3xl border-1.5px border-espresso shadow-choco-lg">
+        <div class="backdrop-blur-md shadow-2xl rounded-3xl p-10 flex flex-col lg:flex-row items-center gap-6 xl:gap-8">
 
-			<!-- Swiper with hydration -->
-			<div class="relative w-full max-w-[400px] mx-auto flex justify-center items-center">
-				<SwiperSlider client:load />
-			</div>
-			<!-- Testo e pulsante -->
-			<div>
-				<h1 class="text-5xl font-serif font-extrabold text-left">
-					L'eccellenza del cioccolato artigianale
-				</h1>
-				<p class="mt-4 text-lg text-left">
-					Dal cuore dell'Italia, il cioccolato più pregiato lavorato con passione e tradizione.
-				</p>
-				<div class="mt-6 text-left">
-					<a href="#prodotti" class="border border-[#411900] text-[#411900] font-semibold px-5 py-2 rounded-lg hover:bg-[#f1d2a5] transition">
-                        Scopri i nostri prodotti
-                      </a>                                          
-				</div>
-			</div>
-		</div>
+          <div class="relative overflow-visible z-10 inline-block">
+            <img
+              src="./pralina_caffe.png"
+              class="relative z-20 w-64 lg:w-80 -translate-y-6 scale-105 shadow-[0_10px_30px_rgba(0,0,0,0.25)] [clip-path:circle(45%_at_50%_50%)]"
+              alt="Pralina"
+            />
+
+          </div>     
+          
+          <!-- Testo e pulsante -->
+          <div>
+            <h1 class="text-5xl font-serif font-extrabold text-left">
+              L'eccellenza del cioccolato artigianale
+            </h1>
+            <p class="mt-4 text-lg text-left">
+              Dal cuore dell'Italia, il cioccolato più pregiato lavorato con passione e tradizione.
+            </p>
+            <div class="mt-6 text-left">
+              <a href="#prodotti" class="btn-cacao-hero">
+                Scopri i nostri prodotti
+              </a>                                                  
+            </div>
+          </div>
+        </div>
+      </div>
 	</section>
 
     <Divider />
@@ -53,16 +59,9 @@ import Footer from "../components/Footer.astro";
         <h2 class="text-4xl font-bold text-center font-serif mb-6">I Nostri Prodotti</h2>
         <p class="text-center text-lg max-w-2xl mx-auto mb-12">
           Scopri le nostre specialità artigianali create con ingredienti selezionati e passione per l'eccellenza.
-        </p>
-      
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-            {products.map((product, index) => (
-              <div class={products.length === 4 && index === 3 ? 'col-span-1 lg:col-start-2' : ''}>
-                <ProductCard product={product} />
-              </div>
-            ))}
-          </div>          
-          
+        </p>  
+            <ProductShowcase client:only="react" products={products} />
+        
     </section>
       
 
@@ -116,32 +115,25 @@ import Footer from "../components/Footer.astro";
 
   if (modal && modalBox) {
     modal.classList.remove('hidden');
-
-    // Animazione
-    setTimeout(() => {
-      modalBox.classList.remove('scale-95', 'opacity-0');
-      modalBox.classList.add('scale-100', 'opacity-100');
-
-      // Scrolla direttamente la box, NON l'overlay
-      modalBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 10);
+    modalBox.classList.remove('scale-95', 'opacity-0');
+    modalBox.classList.add('scale-100', 'opacity-100');
   }
 }
-  function closeModal() {
-    const modal = document.getElementById('contact-modal');
-    const modalBox = document.getElementById('modal-box');
 
-    if (modal && modalBox) {
-      // Attiva animazione di chiusura
-      modalBox.classList.remove('scale-100', 'opacity-100');
-      modalBox.classList.add('scale-95', 'opacity-0');
+function closeModal() {
+  const modal = document.getElementById('contact-modal');
+  const modalBox = document.getElementById('modal-box');
 
-      // Nasconde il modale dopo l'animazione
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 300); // deve combaciare con duration-300
-    }
+  if (modal && modalBox) {
+    modalBox.classList.remove('scale-100', 'opacity-100');
+    modalBox.classList.add('scale-95', 'opacity-0');
+
+    // Usa setTimeout per la transizione, 300ms come specificato nel CSS
+    setTimeout(() => {
+      modal.classList.add('hidden');
+    }, 300);
   }
+}
 
   document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.querySelector('[onclick="openModal()"]');

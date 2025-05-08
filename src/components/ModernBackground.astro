@@ -1,49 +1,70 @@
+---
+---
 <div class="background-wrapper">
-    <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="grain-overlay"></div>
-  </div>
-  
-  <style>
-    .background-wrapper {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-      overflow: hidden;
-      pointer-events: none;
-    }
-  
-    .layer {
-      position: absolute;
-      width: 150%;
-      height: 150%;
-      top: -25%;
-      left: -25%;
-      border-radius: 50%;
-      background: radial-gradient(circle at center, #41190022 0%, transparent 70%);
-      animation: swirl 40s infinite ease-in-out;
-    }
-  
-    .layer:nth-child(2) {
-      background: radial-gradient(circle at 30% 30%, #C99B73 0%, transparent 60%);
-      animation-delay: -20s;
-    }
-  
-    .grain-overlay {
-      background-image: url('cardboard.png');
-      background-repeat: repeat;
-      opacity: 0.06;
-      mix-blend-mode: multiply;
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-  
-    @keyframes swirl {
-      0% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.05); }
-      100% { transform: rotate(360deg) scale(1); }
-    }
-  </style>
-  
+  <div class="cocoa-dust"></div>
+  <div class="grain-overlay"></div>
+</div>
+
+<style>
+  .background-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .cocoa-dust {
+    position: absolute;
+    inset: 0;
+    background-image: url('/cacao.png');
+    background-size: 250px;
+    background-repeat: repeat;
+    opacity: 0;
+    animation: dustFadeIn 20s ease-in-out infinite alternate;
+    z-index: -2;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    filter: brightness(0.85) contrast(1.1); /* più scuro e ricco */
+  }
+
+
+  @keyframes dustFadeIn {
+  0% {
+    opacity: 0.1;
+    transform: scale(1.05) translateY(-2%);
+    filter: blur(2px) brightness(0.85);
+  }
+  100% {
+    opacity: 0.4; /* leggermente più visibile */
+    transform: scale(1) translateY(0%);
+    filter: blur(0) brightness(0.85);
+  }
+}
+
+
+
+  .grain-overlay {
+    background-image: url('/cacao.png');
+    background-repeat: repeat;
+    background-size: 300px;
+    opacity: 0.08; /* un po' più visibile */
+    mix-blend-mode: multiply;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    filter: brightness(0.9);
+  }
+
+
+  @keyframes chocolate-flow {
+    0% { transform: translate(-10%, -10%) rotate(0deg); }
+    100% { transform: translate(10%, 10%) rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.05; }
+    50% { transform: scale(1.2); opacity: 0.15; }
+  }
+</style>
