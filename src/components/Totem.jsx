@@ -91,21 +91,22 @@ export default function ProductShowcase({ products }) {
             {activeCategory === 'singolo' ? (
               <div className="flex flex-col gap-6 max-w-[70vw] mx-auto">
                 {products.filter(p => p.category === "singolo").map((p, i) => (
-                  <div key={i} className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                    <div className="w-full md:w-[55%] flex items-center justify-center">
+                  <div key={i} className="flex flex-col md:flex-row items-center md:items-start gap-4">
+                    <div className="w-full md:w-[65%] flex justify-center">
                       <img 
                         src={p.image} 
                         alt={p.alt} 
-                        className="w-[70%] md:w-full h-auto object-contain rounded-lg shadow-md"
+                        className="w-[90%] md:w-full h-auto object-contain rounded-lg shadow-md"
                       />
                     </div>
-                    <div className="w-full md:w-[45%] text-left">
-                      <h3 className="text-[#411900] text-2xl font-semibold mb-2">Informazioni sul prodotto</h3>
-                      <p className="text-lg text-gray-700 leading-relaxed text-justify">{p.description}</p>
+                    <div className="w-full md:w-[35%] text-left mt-4 md:mt-0">
+                      <h3 className="text-[#411900] text-xl md:text-2xl font-semibold mb-2">Informazioni sul prodotto</h3>
+                      <p className="text-base md:text-lg text-gray-700 leading-relaxed text-justify">{p.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
+
 
 
 
