@@ -16,7 +16,7 @@ const ChiSiamo = () => {
         <h2 className="text-4xl font-bold">Chi siamo</h2>
 
         <p className="mt-4">
-          Ciok Espresso nasce come azienda produttiva di eccellenze dociarie legate alla lavorazione di confetti e cioccolata. Il nostro obbiettivo primario è quello di rispondere alla domanda di consumatori sempre più esigenti, guidati da una scelta consapevole e capaci di riconoscere la qualità oltre che la bontà. A questo scopo abbiamo messo a punto uno stabilimento produttivo altamente performante capace di offire un prodotto sicuro e di qualità garantita e certificata.
+          Ciok Espresso nasce come azienda produttiva di eccellenze dolciarie legate alla lavorazione di confetti e cioccolata. Il nostro obbiettivo primario è quello di rispondere alla domanda di consumatori sempre più esigenti, guidati da una scelta consapevole e capaci di riconoscere la qualità oltre che la bontà. A questo scopo abbiamo messo a punto uno stabilimento produttivo altamente performante capace di offire un prodotto sicuro e di qualità garantita e certificata.
         </p>
         <motion.div
           initial={false}

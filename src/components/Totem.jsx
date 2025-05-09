@@ -60,8 +60,10 @@ export default function ProductShowcase({ products }) {
                     console.log("Categoria selezionata:", product.title); 
                     if (product.title.includes("Praline")) setActiveCategory("astucci");
                     else if (product.title.includes("Tavolette")) setActiveCategory("tavolette");
+                    else if (product.title.includes("Totem") || product.category === "singolo") setActiveCategory("singolo");
                     else setActiveCategory(null);
                   }}
+
                   className="btn-choco text-sm px-5 py-2 mt-4 mx-auto block text-center "
                 >
                   SCOPRI DI PIÙ
@@ -86,29 +88,57 @@ export default function ProductShowcase({ products }) {
             >
               ✕
             </button>
-            <h3 className="font-bold text-3xl text-[#411900] mb-6">Prodotti della categoria: {activeCategory}</h3>
-            <div className="space-y-4">
-              {products
-                .filter(p => p.category === activeCategory)
-                .map((p, i) => (
-                  <div key={i} className="flex items-center gap-6 bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition duration-200">
-                    <div className="overflow-hidden w-40 h-40 rounded-lg relative group">
+            {activeCategory === 'singolo' ? (
+              <div className="flex flex-col gap-6 max-w-[70vw] mx-auto">
+                {products.filter(p => p.category === "singolo").map((p, i) => (
+                  <div key={i} className="flex items-center gap-6">
+                    <div className="w-[55%] flex items-center justify-center">
                       <img 
                         src={p.image} 
                         alt={p.alt} 
-                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        className="w-full h-auto object-contain rounded-lg shadow-md"
                       />
                     </div>
-                    <div className="flex flex-col max-w-[65%]">
-                      <h4 className="font-semibold text-[#411900] text-xl">{p.title}</h4>
-                      <p className="text-sm text-gray-600 mt-1">{p.description}</p>
+                    <div className="w-[45%] text-left flex flex-col justify-center">
+                      <h3 className="text-[#411900] text-2xl font-semibold mb-2">Informazioni sul prodotto</h3>
+                      <p className="text-lg text-gray-700 leading-relaxed text-justify">{p.description}</p>
                     </div>
                   </div>
                 ))}
-            </div>
+              </div>
+
+
+
+            ) : (
+              <>
+                <h3 className="font-bold text-3xl text-[#411900] mb-6">Prodotti della categoria: {activeCategory}</h3>
+                <div className="space-y-4">
+                  {products
+                    .filter(p => p.category === activeCategory)
+                    .map((p, i) => (
+                      <div key={i} className="flex items-center gap-6 bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition duration-200">
+                        <div className="overflow-hidden w-40 h-40 rounded-lg relative group">
+                          <img 
+                            src={p.image} 
+                            alt={p.alt} 
+                            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                          />
+                        </div>
+                        <div className="flex flex-col max-w-[65%]">
+                          <h4 className="font-semibold text-[#411900] text-xl">{p.title}</h4>
+                          <p className="text-sm text-gray-600 mt-1">{p.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </>
+            )}
+
           </div>
         </div>
       )}
+
+
 
     </>
   );
